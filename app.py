@@ -126,23 +126,12 @@ st.markdown("""
 
 # Initialize session state
 if 'meeting_date' not in st.session_state:
-    # Default to 30 days from now (or next Valentine's Day if it's in the future)
-    today = datetime.now()
-    next_valentines = datetime(today.year, 2, 14, 0, 0, 0)
-    
-    # If Valentine's Day has passed this year, use next year's
-    if next_valentines < today:
-        next_valentines = datetime(today.year + 1, 2, 14, 0, 0, 0)
-    
-    # Use Valentine's Day if it's within reasonable range, otherwise 30 days from now
-    if (next_valentines - today).days <= 365:
-        st.session_state.meeting_date = next_valentines
-    else:
-        st.session_state.meeting_date = today + timedelta(days=30)
+    # Default to September 25th, 2025
+    st.session_state.meeting_date = datetime(2025, 9, 25, 0, 0, 0)
 else:
     # Check if existing meeting date is in the past and reset if needed
     if st.session_state.meeting_date < datetime.now():
-        st.session_state.meeting_date = datetime.now() + timedelta(days=30)
+        st.session_state.meeting_date = datetime(2025, 9, 25, 0, 0, 0)
 
 if 'show_date_picker' not in st.session_state:
     st.session_state.show_date_picker = False
